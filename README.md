@@ -8,14 +8,29 @@ Java是解释性语言（C++是编译性语言），保证Java具有平台独立
 
 ### 对String的理解
 
-String类是不可变类，当创建了这个类的实例后，就不允许修改它的值了，也就是说，一个对象一旦被创建出来，在其整个生命周期中，他的成员变量就不能被修改了。String s = “Hello”语句声明了一个可以指向String类型对象的引用，这个引用的名字为s，它指向了一个字符串常量“Hello”。s+=“ world”并没有改变s所指向的对象，这句代码运行后，s指向了另一个String类型的对象，该对象的内容为“Hello world”。原来的那个字符串常量“Hello”还存在于内存中，并没有被改变。
+String类是不可变类，简单的来说：String 类中使用 final 关键字修饰字符数组来保存字符串，private　final　char　value[]，所以 String 对象是不可变的。
+String s = “Hello”语句声明了一个可以指向String类型对象的引用，这个引用的名字为s，它指向了一个字符串常量“Hello”。s+=“ world”并没有改变s所指向的对象，这句代码运行后，s指向了另一个String类型的对象，该对象的内容为“Hello world”。原来的那个字符串常量“Hello”还存在于内存中，并没有被改变。
 不可变类具有使用简单、线程安全、节省内存等优点。
 
 ### String、StringBuilder、StringBuffer
 
-String是不可变类，也就是说，String对象一旦被创建，其值将不能被改变，而StringBuffer是可变类，当对象被创建后仍然可以对其值进行修改。由于String是不可变类，因此适合在需要被共享的场合中使用，而当一个字符串经常需要被修改时，最好使用StringBuffer来实现。
-StringBuilder也是可以被修改的字符串，它与StringBuffer类似，都是字符串缓冲区，但StringBuilder不是线程安全的，如果只是在单线程中使用字符串缓冲区，那么StringBuilder的效率会更高些。因此在只有单线程访问时可以使用StringBuilder，当有多个线程访问时，最好使用线程安全的StringBuffer。因为StringBuffer必要时可以对这些方法进行同步，所以任意特定实例上的所有操作就好像是以串行顺序发生的，该顺序与所涉及的每个线程进行的方法调用顺序一致。
+（1）可变性
 
+简单的来说：String 类中使用 final 关键字修饰字符数组来保存字符串，private　final　char　value[]，所以 String 对象是不可变的。而StringBuilder 与 StringBuffer 都继承自 AbstractStringBuilder 类，在 AbstractStringBuilder 中也是使用字符数组保存字符串char[]value 但是没有用 final 关键字修饰，所以这两种对象都是可变的。
+
+（2）线程安全性
+
+String 中的对象是不可变的，也就可以理解为常量，线程安全。AbstractStringBuilder 是 StringBuilder 与 StringBuffer 的公共父类，定义了一些字符串的基本操作，如 expandCapacity、append、insert、indexOf 等公共方法。StringBuffer 对方法加了同步锁或者对调用的方法加了同步锁，所以是线程安全的。StringBuilder 并没有对方法进行加同步锁，所以是非线程安全的。　
+
+（3）性能
+
+每次对 String 类型进行改变的时候，都会生成一个新的 String 对象，然后将指针指向新的 String 对象。StringBuffer 每次都会对 StringBuffer 对象本身进行操作，而不是生成新的对象并改变对象引用。相同情况下使用 StringBuilder 相比使用 StringBuffer 仅能获得 10%~15% 左右的性能提升，但却要冒多线程不安全的风险。
+
+（4）对于三者使用的总结：
+
+操作少量的数据: 适用String
+单线程操作字符串缓冲区下操作大量数据: 适用StringBuilder
+多线程操作字符串缓冲区下操作大量数据: 适用StringBuffer
 ### volatile关键是什么作用？它跟synchronized方法有什么不同？
 
 volatile关键字的作用是：保证变量的可见性。 
