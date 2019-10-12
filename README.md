@@ -756,7 +756,7 @@ https://www.cnblogs.com/logsharing/p/8448446.html
 ## Redis在项目中的使用场景
 
 + 1、String：存储MySQL数据库中的字段，共享Session
-+ 2、Hash：存储对象，如用户对象{id,name,age}
++ 2、Hash：存储对象，如用户对象{id,name,age}，hset(key,field,value)
 + 3、List：消息队列，电商秒杀系统
-+ 4、set：自动排序，微博共同好友，求交集sInner
++ 4、set：自动排序，微博共同好友，求交集sinter
 + 5、zset：按权重排序，如商品的综合排序，价格排序
