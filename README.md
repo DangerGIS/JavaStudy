@@ -76,6 +76,20 @@ volatile不会造成线程的阻塞，而synchronized可能会造成线程的阻
 
 （5）方法的首行是super()或super(实参列表)，即对应父类的方法
 
+### 方法的重写Override
+
+（1）哪些方法不能被重写
+
++ final方法
++ 静态方法
++ private等子类中不可见方法
+
+（2）对象的多态性
+
++ 子类如果重写了父类的方法，通过子类对象调用的一定是子类重写过的代码
++ 非静态方法默认的调用对象是this
++ this对象在构造器或者说&lt;init&gt;()方法中就是正在创建的对象
+
 ### HashMap的工作原理
 
 HashMap是基于hashing的原理，我们使用put(key, value)存储对象到HashMap中，使用get(key)从HashMap中获取对象。当我们给put()方法传递键和值时，我们先对键调用hashCode()方法，返回的hashCode用于找到bucket位置来储存Entry对象。”这里关键点在于指出，HashMap是在bucket中储存键对象和值对象，作为Map.Entry。这一点有助于理解获取对象的逻辑。如果你没有意识到这一点，或者错误的认为仅仅只在bucket中存储值的话，你将不会回答如何从HashMap中获取对象的逻辑。
