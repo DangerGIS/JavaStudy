@@ -792,6 +792,10 @@ TCP/IP协议栈包含了大量的协议，主要分为四层：
 + 传输层：UDP、TCP
 + 应用层：HTTP、FTP、SMTP等
 
+## OSI七层协议模型
+
+![blockchain](https://img2018.cnblogs.com/blog/1300168/201903/1300168-20190311101237824-1659250156.png "七层模型")
+
 ## get()和post()的区别
 
 https://www.cnblogs.com/logsharing/p/8448446.html
